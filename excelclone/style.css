@@ -1,0 +1,29 @@
+* {
+    box-sizing: border-box;
+}
+
+.menu {
+    border: 1px solid red;
+    height: 78px;
+}
+
+.address {
+    border: 1px solid green;
+    height: 38px;
+}
+
+.main {
+    background-color: lightgreen;
+    height: calc( 100vh - ( 38px + 78px));
+}
+
+.row {
+    display: flex;
+}
+
+.cell{
+    min-width: 68px;
+    min-height: 23px;
+    border: 1px solid green;
+    text-align: center;
+}
