@@ -1,11 +1,13 @@
 let fs = require("fs");
 let request = require("request");
 let cheerio = require("cheerio");
-let url = "https://auth.geeksforgeeks.org/user/shubhamsingh1840/practice/"
+let J = require('jquery')
+function GFG(name) {
+    let url = "https://auth.geeksforgeeks.org/user/" + name + "/practice/";
+    request(url, cb);
+}
 
 
-
-request(url, cb);
 function cb(err, header, body) {
     if (err == null && header.statusCode == 200) {
         console.log("received")
@@ -19,15 +21,11 @@ function cb(err, header, body) {
         console.log(header.statusCode);
     }
 }
-
+// let da = []
 function work(body) {
     let $ = cheerio.load(body);
-    //  
-
     let fullInfo = $($('div[class="mdl-cell mdl-cell--7-col mdl-cell--12-col-phone whiteBgColor mdl-shadow--2dp userMainDiv"]')).find("div")
-
     let abs = $($('div[class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone textBold"]')).find("a")
-
     let randObj = $('div[class="mdl-cell mdl-cell--9-col mdl-cell--12-col-phone textBold"]')
     let name = $($($(fullInfo[0])).find("div")[1]).text();
     let collegeName = $(abs[0]).text();
@@ -38,8 +36,11 @@ function work(body) {
     let overAllCodScore = $(rObj[0]).text().split(":")[1].trim();
     let totalQuestions = $(rObj[1]).text().split(":")[1].trim();
 
-    let finalAns = {
+    let da = {
         name, collegeName, collegeAmbassador, rankCollege, overAllCodScore, totalQuestions
     }
-    console.log(finalAns)
+    J(".gf").val(name)
+
 }
+
+module.exports.GFG = GFG;
